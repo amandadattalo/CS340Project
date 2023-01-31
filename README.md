@@ -83,4 +83,4 @@ Holds information about the different genres of books that are contained in the 
 
 # Entity-Relationship Diagram
 
-![EntityDiagram](image.jpg)
+![EntityDiagram](./Common/entityRelationship.jpg)
