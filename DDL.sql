@@ -40,7 +40,7 @@ CREATE TABLE Books (
     series_id int,
     genre_id int NOT NULL,
     PRIMARY KEY (book_id),
-    FOREIGN KEY (series_id) REFERENCES Series(series_id),
+    FOREIGN KEY (series_id) REFERENCES Series(series_id) ON DELETE SET NULL,
     FOREIGN KEY (genre_id) REFERENCES Genre(genre_id)
 );
 
@@ -58,8 +58,8 @@ CREATE TABLE Books_Authors (
     book_id int NOT NULL,
     author_id int NOT NULL,
     PRIMARY KEY (book_author_id),
-    FOREIGN KEY (book_id) REFERENCES Books(book_id),
-    FOREIGN KEY (author_id) REFERENCES Authors(author_id)
+    FOREIGN KEY (book_id) REFERENCES Books(book_id) ON DELETE CASCADE,
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id) ON DELETE CASCADE
 );
 
 -- Create Series_Authors Table
@@ -68,8 +68,8 @@ CREATE TABLE Series_Authors (
     series_id int NOT NULL,
     author_id int NOT NULL,
     PRIMARY KEY (series_author_id),
-    FOREIGN KEY (series_id) REFERENCES Series(series_id),
-    FOREIGN KEY (author_id) REFERENCES Authors(author_id)
+    FOREIGN KEY (series_id) REFERENCES Series(series_id) ON DELETE CASCADE,
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id) ON DELETE CASCADE
 );
 
 
