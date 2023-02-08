@@ -4,7 +4,7 @@ SET AUTOCOMMIT = 0;
 -- ################
 -- Drop Tables
 -- ################
-DROP TABLE IF EXISTS Genre;
+DROP TABLE IF EXISTS Genres;
 DROP TABLE IF EXISTS Series;
 DROP TABLE IF EXISTS Books;
 DROP TABLE IF EXISTS Authors;
@@ -15,8 +15,8 @@ DROP TABLE IF EXISTS Series_Authors;
 -- Create Tables
 -- ################
 
--- Create Genre Table
-CREATE TABLE Genre (
+-- Create Genres Table
+CREATE TABLE Genres (
     genre_id int UNIQUE NOT NULL AUTO_INCREMENT,
     name varchar(255) UNIQUE NOT NULL,
     description varchar(255) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE Series (
     genre_id int NOT NULL,
     series_length int NOT NULL,
     PRIMARY KEY (series_id),
-    FOREIGN KEY (genre_id) REFERENCES Genre(genre_id)
+    FOREIGN KEY (genre_id) REFERENCES Genres(genre_id)
 );
 
 -- Create Books Table
@@ -42,7 +42,7 @@ CREATE TABLE Books (
     genre_id int NOT NULL,
     PRIMARY KEY (book_id),
     FOREIGN KEY (series_id) REFERENCES Series(series_id) ON DELETE SET NULL,
-    FOREIGN KEY (genre_id) REFERENCES Genre(genre_id)
+    FOREIGN KEY (genre_id) REFERENCES Genres(genre_id)
 );
 
 -- Create Authors Table
@@ -78,8 +78,8 @@ CREATE TABLE Series_Authors (
 -- Insert Data
 -- ################
 
--- Insert Genre Data
-INSERT INTO Genre (name, description)
+-- Insert Genres Data
+INSERT INTO Genres (name, description)
 VALUES ('Fantasy', 'Fantasy is a genre that typically features the use of magic or other supernatural phenomena in the plot, setting, or theme.'),
 ('Science Fiction', 'Science Fiction is a fictionalized story wherein the setting and plot are centered around technology, time travel, outer space, or scientific principles, with or without the presence of aliens.'),
 ('Mystery', 'Mystery is a fiction genre where the nature of an event, usually a murder or other crime, remains mysterious until the end of the story.');
