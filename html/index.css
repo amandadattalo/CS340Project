@@ -1,0 +1,48 @@
+body, html{
+    margin: 0;
+    height: 100%;
+    /* background-color: #1d1e22; */
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+
+/* NAV Bar */
+
+ul {  
+    padding: 0;  
+    margin: 0;
+    /* background-color:#77DD77;   */
+    background-color: #DC4405;
+    font-family: Arial, sans serif;  
+    font-size: 12px;  
+    text-transform: uppercase;
+    text-align: center;
+}
+
+li {  
+    display: inline-block;
+}
+
+a {  
+    display: block;  
+    padding: 10px;  
+    color: white;  
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: black;
+}
+
+/* Headers */
+h1 {
+    font-family: Arial, sans serif; 
+    text-align: center;
+}
+
+h3 {
+    font-family: Arial, sans serif; 
+    text-align: center;
+    margin: 0;
+}
