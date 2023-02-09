@@ -9,7 +9,7 @@ body, html{
 
 /* NAV Bar */
 
-ul {  
+nav {  
     padding: 0;  
     margin: 0;
     /* background-color:#77DD77;   */
@@ -20,7 +20,7 @@ ul {
     text-align: center;
 }
 
-li {  
+#navli {  
     display: inline-block;
 }
 
@@ -108,4 +108,11 @@ form {
 
   button:hover {
     background-color: #1a73e8;
+  }
+
+  footer {
+    justify-content: center;
+    padding: 5px;
+    background-color: #DC4405;
+    color: white;
   }
