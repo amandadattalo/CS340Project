@@ -65,6 +65,44 @@
        </tbody>
    </table>
 
+   <!-- For for adding an author -->
+     <form>
+    <fieldset>
+      <legend>Add an Author</legend>
+
+      <label for="first_name">First name:</label>
+      <input type="text" name="first_name" id="first_name">
+      <br>
+
+      <label for="last_name">Last Name:</label>
+      <input name="last_name" id="last_name">
+      <br>
+
+      <label for="book">Books by Author</label>
+      <select name="books" id="book" multiple>
+        <option value = "The Fellowship of the Ring">The Fellowship of the Ring</option>
+        <option value = "The Two Towers">The Two Towers</option>
+        <option value = "The Return of the King">The Return of the King</option>
+        <option value = "The Way of Kings">The Way of Kings</option>
+        <option value = "Words of Radiance">Words of Radiance</option>
+        <option value = "Oathbringer">Oathbringer</option>
+        <option value = "Rhythm of War">Rhythm of War</option>
+        <option value = "Warbreaker">Warbreaker</option>
+          
+      </select>
+      <br>
+
+      <label for="genre">Genre</label>
+      <select name="genre" id="genre">
+        <option value="1">Fantasy</option>
+        <option value="2">Science Fiction</option>
+        <option value="2">Mystery</option>
+      </select>
+      <br>
+
+      <button>Add Author</button>    
+    </fieldset>
+  </form> 
 </body>
 </html>
 
