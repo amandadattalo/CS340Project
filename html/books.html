@@ -11,13 +11,11 @@
   <!-- NAV -->
     <nav>
       <ul>
-         <li><a href="index.html">Home</a></li>
-         <li><a href="books.html">Books</a></li>
-         <li><a href="authors.html">Authors</a></li>
-         <li><a href="series.html">Series</a></li>
-         <li><a href="genres.html">Genres</a></li>
-         <li><a href="books_authors.html">Books_Authors</a></li>
-         <li><a href="series_authors.html">Series_Authors</a></li>
+         <li id = "navli"><a href="index.html">Home</a></li>
+         <li id = "navli"><a href="books.html">Books</a></li>
+         <li id = "navli"><a href="authors.html">Authors</a></li>
+         <li id = "navli"><a href="series.html">Series</a></li>
+         <li id = "navli"><a href="genres.html">Genres</a></li>
        </ul>
    </nav>
 
@@ -30,6 +28,7 @@
     <thead>
       <tr>
         <th>Title</th>
+        <th>Author</th>
         <th>In Series?</th>
         <th>Series</th>
         <th>Genre</th>
@@ -39,20 +38,58 @@
     <tbody>
       <tr>
         <td>The Fellowship of the Ring</td>
+        <td>J.R.R. Tolkien</td>
         <td>Yes</td>
         <td>Lord of the Rings</td>
         <td>Fantasy</td>
       </tr>
       <tr>
         <td>The Two Towers</td>
+        <td>J.R.R. Tolkien</td>
         <td>Yes</td>
         <td>Lord of the Rings</td>
         <td>Fantasy</td>
       </tr>
       <tr>
         <td>The Return of the King</td>
+        <td>J.R.R. Tolkien</td>
         <td>Yes</td>
         <td>Lord of the Rings</td>
+        <td>Fantasy</td>
+      </tr>
+      <tr>
+        <td>The Way of Kings</td>
+        <td>Brandon Sanderson</td>
+        <td>Yes</td>
+        <td>The Stormlight Archive</td>
+        <td>Fantasy</td>
+      </tr>
+      <tr>
+        <td>Words of Radiance</td>
+        <td>Brandon Sanderson</td>
+        <td>Yes</td>
+        <td>The Stormlight Archive</td>
+        <td>Fantasy</td>
+      </tr>
+      <tr>
+        <td>Oathbringer</td>
+        <td>Brandon Sanderson</td>
+        <td>Yes</td>
+        <td>The Stormlight Archive</td>
+        <td>Fantasy</td>
+      </tr>
+      <tr>
+        <td>Rhythm of War</td>
+        <td>Brandon Sanderson</td>
+        <td>Yes</td>
+        <td>The Stormlight Archive</td>
+        <td>Fantasy</td>
+      </tr>
+      <tr>
+        <td>Warbreaker</td>
+        <td>Brandon Sanderson</td>
+        <td>No</td>
+        <td></td>
         <td>Fantasy</td>
       </tr>
     </tbody>
@@ -79,8 +116,8 @@
       <select name="series" id="series">
         <option disabled selected value> -- select a series -- </option>
         <option value="1">Lord of the Rings</option>
-        <option value="2">Harry Porter</option>
-        <option value="2">Hunger Games</option>
+        <option value="2">Harry Potter</option>
+        <option value="3">Hunger Games</option>
       </select>
       <!-- <br> -->
 
@@ -88,7 +125,7 @@
       <select name="genre" id="genre">
         <option value="1">Fantasy</option>
         <option value="2">Science Fiction</option>
-        <option value="2">Mistery</option>
+        <option value="3">Mystery</option>
       </select>
       <br>
 

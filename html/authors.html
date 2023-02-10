@@ -9,19 +9,100 @@
 <body>
     <nav>
       <ul>
-         <li><a href="index.html">Home</a></li>
-         <li><a href="books.html">Books</a></li>
-         <li><a href="authors.html">Authors</a></li>
-         <li><a href="series.html">Series</a></li>
-         <li><a href="genres.html">Genres</a></li>
-         <li><a href="books_authors.html">Books_Authors</a></li>
-         <li><a href="series_authors.html">Series_Authors</a></li>
+         <li id = "navli"><a href="index.html">Home</a></li>
+         <li id = "navli"><a href="books.html">Books</a></li>
+         <li id = "navli"><a href="authors.html">Authors</a></li>
+         <li id = "navli"><a href="series.html">Series</a></li>
+         <li id = "navli"><a href="genres.html">Genres</a></li>
        </ul>
    </nav>
 
    <h1>Authors</h1>
 
+   <table>
+       <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Books Written</th>
+            </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td>J.R.R.</td>
+               <td>Tolkien</td>
+               <td>
+                    <ul>
+                        <li>The Fellowship of the Ring</li><br>
+                        <li>The Two Towers</li><br>
+                        <li>The Return of the King</li><br>
+                    </ul>
+               </td>
+           </tr>
+           <tr>
+               <td>J.K.</td>
+               <td>Rowling</td>
+               <td></td> 
+           </tr>
+           <tr>
+               <td>Suzanne</td>
+               <td>Collins</td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>Brandon</td>
+               <td>Sanderson</td>
+               <td>
+                    <ul>
+                        <li>The Way of Kings<br></li>
+                        <li>Words of Radiance<br></li>
+                        <li>Oathbringer<br></li>
+                        <li>Rhythm of War<br></li>
+                        <li>Warbreaker</li>
+                    </ul>
+               </td>
+           </tr>
+       </tbody>
+   </table>
 
+   <!-- For for adding an author -->
+     <form>
+    <fieldset>
+      <legend>Add an Author</legend>
+
+      <label for="first_name">First name:</label>
+      <input type="text" name="first_name" id="first_name">
+      <br>
+
+      <label for="last_name">Last Name:</label>
+      <input name="last_name" id="last_name">
+      <br>
+
+      <label for="book">Books by Author</label>
+      <select name="books" id="book" multiple>
+        <option value = "The Fellowship of the Ring">The Fellowship of the Ring</option>
+        <option value = "The Two Towers">The Two Towers</option>
+        <option value = "The Return of the King">The Return of the King</option>
+        <option value = "The Way of Kings">The Way of Kings</option>
+        <option value = "Words of Radiance">Words of Radiance</option>
+        <option value = "Oathbringer">Oathbringer</option>
+        <option value = "Rhythm of War">Rhythm of War</option>
+        <option value = "Warbreaker">Warbreaker</option>
+          
+      </select>
+      <br>
+
+      <label for="genre">Genre</label>
+      <select name="genre" id="genre">
+        <option value="1">Fantasy</option>
+        <option value="2">Science Fiction</option>
+        <option value="2">Mystery</option>
+      </select>
+      <br>
+
+      <button>Add Author</button>    
+    </fieldset>
+  </form> 
 </body>
 </html>
 
