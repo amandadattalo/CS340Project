@@ -1,29 +1,30 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>CS340 - Book Database</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <title>CS340 - Book Database</title>
 </head>
 <body>
 
   <!-- NAV -->
-    <nav>
-      <ul>
-         <li id = "navli"><a href="index.html">Home</a></li>
-         <li id = "navli"><a href="books.html">Books</a></li>
-         <li id = "navli"><a href="authors.html">Authors</a></li>
-         <li id = "navli"><a href="series.html">Series</a></li>
-         <li id = "navli"><a href="genres.html">Genres</a></li>
-       </ul>
-   </nav>
+  <nav>
+    <ul>
+      <li id = "navli"><a href="index.html">Home</a></li>
+      <li id = "navli"><a href="books.html">Books</a></li>
+      <li id = "navli"><a href="authors.html">Authors</a></li>
+      <li id = "navli"><a href="series.html">Series</a></li>
+      <li id = "navli"><a href="genres.html">Genres</a></li>
+      <li id = "navli"><a href="intersection_tables.html">Book and Series to Authors</a></li>
+      </ul>
+  </nav>
 
-   <!-- Header -->
-   <h1>Books</h1>
+  <!-- Header -->
+  <h1>Books</h1>
 
-   <!-- Table -->
-   <table>
+  <!-- Table -->
+  <table>
 
     <thead>
       <tr>
@@ -32,6 +33,8 @@
         <th>In Series?</th>
         <th>Series</th>
         <th>Genre</th>
+        <th>Edit</th>
+        <th>Delete</th>
       </tr>
     </thead>
 
@@ -42,6 +45,8 @@
         <td>Yes</td>
         <td>Lord of the Rings</td>
         <td>Fantasy</td>
+        <td><button onclick="location.href='./edit_html/edit_books.html'">Edit</button></td>
+        <td><button>Delete</button></td>
       </tr>
       <tr>
         <td>The Two Towers</td>
@@ -49,6 +54,8 @@
         <td>Yes</td>
         <td>Lord of the Rings</td>
         <td>Fantasy</td>
+        <td><button onclick="location.href='./edit_html/edit_books.html'">Edit</button></td>
+        <td><button>Delete</button></td>
       </tr>
       <tr>
         <td>The Return of the King</td>
@@ -56,6 +63,8 @@
         <td>Yes</td>
         <td>Lord of the Rings</td>
         <td>Fantasy</td>
+        <td><button onclick="location.href='./edit_html/edit_books.html'">Edit</button></td>
+        <td><button>Delete</button></td>
       </tr>
       <tr>
         <td>The Way of Kings</td>
@@ -63,6 +72,8 @@
         <td>Yes</td>
         <td>The Stormlight Archive</td>
         <td>Fantasy</td>
+        <td><button onclick="location.href='./edit_html/edit_books.html'">Edit</button></td>
+        <td><button>Delete</button></td>
       </tr>
       <tr>
         <td>Words of Radiance</td>
@@ -70,6 +81,8 @@
         <td>Yes</td>
         <td>The Stormlight Archive</td>
         <td>Fantasy</td>
+        <td><button onclick="location.href='./edit_html/edit_books.html'">Edit</button></td>
+        <td><button>Delete</button></td>
       </tr>
       <tr>
         <td>Oathbringer</td>
@@ -77,6 +90,8 @@
         <td>Yes</td>
         <td>The Stormlight Archive</td>
         <td>Fantasy</td>
+        <td><button onclick="location.href='./edit_html/edit_books.html'">Edit</button></td>
+        <td><button>Delete</button></td>
       </tr>
       <tr>
         <td>Rhythm of War</td>
@@ -84,6 +99,8 @@
         <td>Yes</td>
         <td>The Stormlight Archive</td>
         <td>Fantasy</td>
+        <td><button onclick="location.href='./edit_html/edit_books.html'">Edit</button></td>
+        <td><button>Delete</button></td>
       </tr>
       <tr>
         <td>Warbreaker</td>
@@ -91,19 +108,31 @@
         <td>No</td>
         <td></td>
         <td>Fantasy</td>
+        <td><button onclick="location.href='./edit_html/edit_books.html'">Edit</button></td>
+        <td><button>Delete</button></td>
       </tr>
     </tbody>
 
   </table> 
 
-  <!-- Form for Adding -->
+  <!-- Form for Adding Books -->
   <form>
     <fieldset>
       <legend>Add a Book</legend>
 
       <label for="title">Title:</label>
       <input type="text" name="title" id="title">
-      <!-- <br> -->
+      <br>
+
+      <label for="author">Author(s):</label>
+      <select multiple name="author" id="author">
+        <option value="1">J.R.R. Tolkien</option>
+        <option value="2">J.K. Rowling</option>
+        <option value="3">Suzanne Collins</option>
+        <option value="4">Brandon Sanderson</option>
+      </select>
+
+      <br>
 
       <label for="in_series">Part of a series?</label>
       <select name="in_series" id="in_series">
@@ -119,7 +148,7 @@
         <option value="2">Harry Potter</option>
         <option value="3">Hunger Games</option>
       </select>
-      <!-- <br> -->
+      <br>
 
       <label for="genre">Genre</label>
       <select name="genre" id="genre">
@@ -129,12 +158,11 @@
       </select>
       <br>
 
-      <p>** If the series was not found, please create a series first</p>
+      <p>** If author, series or genre was not found, please create them first.</p>
 
-      <button>Add Book</button>    
+      <button id="blue_button" disabled>Add Book</button>    
     </fieldset>
   </form> 
-
 
 </body>
 </html>

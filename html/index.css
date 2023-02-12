@@ -1,23 +1,27 @@
 body, html{
     margin: 0;
+    padding: 0;
     height: 100%;
     /* background-color: #1d1e22; */
     background-size: cover;
     background-repeat: no-repeat;
+    font-family: Arial, sans serif;
   }
 
 
 /* NAV Bar */
-
 nav {  
     padding: 0;  
     margin: 0;
     /* background-color:#77DD77;   */
     background-color: #DC4405;
-    font-family: Arial, sans serif;  
     font-size: 12px;  
     text-transform: uppercase;
     text-align: center;
+}
+
+ul {
+    margin: 0;
 }
 
 #navli {  
@@ -37,25 +41,37 @@ a:hover {
 
 /* Headers */
 h1 {
-    font-family: Arial, sans serif; 
     text-align: center;
 }
 
 h3 {
-    font-family: Arial, sans serif; 
     text-align: center;
     margin: 0;
 }
 
-/* Tables */
+/* Homepage Description */
+h4 {
+    margin-left: 20%;
+    margin-right: 20%;   
+}
+.overview {
+    margin-left: 20%;
+    margin-right: 20%;
+    font-size: 17px;
+}
 
+img {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+/* Tables */
 table {
     border-collapse: collapse;
     /* margin: 25px 0; */
     margin-left: auto;
     margin-right: auto;
     font-size: 14px;
-    font-family: Arial, sans serif; 
     text-align: center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
@@ -78,9 +94,10 @@ tbody tr:last-of-type {
 }
 
 /* Forms */
-
 fieldset {
     display: inline-block;
+    margin-top: 30px;
+    margin-bottom: 50px;
 }
 
 form {
@@ -88,15 +105,25 @@ form {
     text-align: center;
   }
    
-  input,
+  /* input,
   textarea {
     padding: 1px;
     margin: 5px;
     width: 35%;
     border: 1px solid;
+  } */
+
+  input, select, textarea {
+    width: 100%;
+    padding: 5px 20px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid gray;
+    border-radius: 4px;
+    box-sizing: border-box;
   }
   
-  button {
+  #blue_button {
     margin-top: 5px;
     cursor: pointer;
     background-color: #1b66c9;
@@ -106,10 +133,23 @@ form {
     padding: 9px 15px;
   }
 
-  button:hover {
+  #blue_button:hover {
     background-color: #1a73e8;
   }
 
+.books_authors {
+    float: left;
+    margin-left: 20%;
+
+}
+
+.series_authors {
+    float: right;
+    margin-right: 20%;
+
+}
+
+/* Footer */
   footer {
     justify-content: center;
     padding: 5px;
