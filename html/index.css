@@ -6,7 +6,7 @@ body, html{
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans serif;
-  }
+}
 
 
 /* NAV Bar */
@@ -22,6 +22,7 @@ nav {
 
 ul {
     margin: 0;
+    padding: 0;
 }
 
 #navli {  
@@ -35,9 +36,23 @@ a {
     text-decoration: none;
 }
 
+@media (max-width: 577px) {
+    a {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
+@media (max-width: 517px) {
+    a {
+        font-size: 11px;
+    }
+}
+
 a:hover {
     background-color: black;
 }
+
 
 /* Headers */
 h1 {
@@ -49,11 +64,13 @@ h3 {
     margin: 0;
 }
 
+
 /* Homepage Description */
 h4 {
     margin-left: 20%;
     margin-right: 20%;   
 }
+
 .overview {
     margin-left: 20%;
     margin-right: 20%;
@@ -64,6 +81,76 @@ img {
     margin-left: 20%;
     margin-right: 20%;
 }
+
+@media (max-width: 1050px) {
+    h4 {
+        margin-left: 10%;
+        margin-right: 10%;   
+    }
+
+    .overview {
+        margin-left: 10%;
+        margin-right: 10%;
+        font-size: 17px;
+    }
+    
+    img {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
+
+@media (max-width: 800px) {
+    h4 {
+        margin-left: 5%;
+        margin-right: 5%;   
+    }
+
+    .overview {
+        margin-left: 5%;
+        margin-right: 5%;
+        font-size: 17px;
+    }
+    
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        height: auto;
+    }
+}
+
+@media (max-width: 680px) {
+    h4 {
+        margin-left: 5px;
+        margin-right: 0;   
+    }
+
+    .overview {
+        margin-left: 5px;
+        margin-right: 0;
+        font-size: 17px;
+    }
+    
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 450px;
+        height: auto;
+    }
+}
+
+@media (max-width: 467px) {
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 400px;
+        height: auto;
+    }
+}
+
 
 /* Tables */
 table {
@@ -93,6 +180,55 @@ tbody tr:last-of-type {
     border-bottom: 2px solid black;
 }
 
+.genres_table{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+@media (max-width: 900px) {
+    .books_table{
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 660px) {
+    th, td {
+        padding: 6px 7px;
+    }
+}
+
+@media (max-width: 576px) {
+    th, td {
+        padding: 6px 7px;
+    }
+    .books_table{
+        font-size: 12px;
+    }
+
+    .books_button{
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 490px) {
+    .books_table{
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+    th, td {
+        padding: 3px 4px;
+    }
+    .books_table{
+        font-size: 12px;
+    }
+
+    .books_button{
+        font-size: 12px;
+    }
+}
+
+
 /* Forms */
 fieldset {
     display: inline-block;
@@ -103,7 +239,7 @@ fieldset {
 form {
     margin-top: 20px;
     text-align: center;
-  }
+}
    
   /* input,
   textarea {
@@ -113,46 +249,97 @@ form {
     border: 1px solid;
   } */
 
-  input, select, textarea {
-    width: 100%;
-    padding: 5px 20px;
-    margin: 5px 0;
-    display: inline-block;
-    border: 1px solid gray;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  #blue_button {
-    margin-top: 5px;
-    cursor: pointer;
-    background-color: #1b66c9;
-    color: white;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    padding: 9px 15px;
-  }
+input, select, textarea {
+width: 100%;
+padding: 5px 20px;
+margin: 5px 0;
+display: inline-block;
+border: 1px solid gray;
+border-radius: 4px;
+box-sizing: border-box;
+}
 
-  #blue_button:hover {
-    background-color: #1a73e8;
-  }
+#blue_button {
+margin-top: 5px;
+cursor: pointer;
+background-color: #1b66c9;
+color: white;
+border-radius: 4px;
+border: 1px solid transparent;
+padding: 9px 15px;
+}
 
+#blue_button:hover {
+background-color: #1a73e8;
+}
+ 
+
+/* Intersection Tables */
 .books_authors {
     float: left;
     margin-left: 20%;
-
 }
 
 .series_authors {
     float: right;
     margin-right: 20%;
-
 }
 
+@media (max-width: 1200px) {
+    .books_authors {
+        float: left;
+        margin-left: 15%;
+    }
+    
+    .series_authors {
+        float: right;
+        margin-right: 15%;
+    }
+}
+
+@media (max-width: 1050px) {
+    .books_authors {
+        float: left;
+        margin-left: 10%;
+    }
+    
+    .series_authors {
+        float: right;
+        margin-right: 10%;
+    }
+}
+
+@media (max-width: 900px) {
+    .books_authors {
+        float: left;
+        margin-left: 5%;
+    }
+    
+    .series_authors {
+        float: right;
+        margin-right: 5%;
+    }
+}
+
+@media (max-width: 800px) {
+    .books_authors {
+        float: none;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .series_authors {
+        float: none;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+
 /* Footer */
-  footer {
-    justify-content: center;
-    padding: 5px;
-    background-color: #DC4405;
-    color: white;
-  }
+footer {
+justify-content: center;
+padding: 5px;
+background-color: #DC4405;
+color: white;
+}
