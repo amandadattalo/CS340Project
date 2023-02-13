@@ -1,0 +1,63 @@
+<!-- NAV -->
+<nav>
+  <ul>
+        <li id = "navli"><a href="/">Home</a></li>
+        <li id = "navli"><a href="books">Books</a></li>
+        <li id = "navli"><a href="authors">Authors</a></li>
+        <li id = "navli"><a href="series">Series</a></li>
+        <li id = "navli"><a href="genres">Genres</a></li>
+        <li id = "navli"><a href="intersection_tables">Book and Series to Authors</a></li>
+    </ul>
+</nav>
+
+<!-- Header -->
+<h1>Genres</h1>
+
+<!-- Table -->
+<table class="genres_table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Fantasy</td>
+            <td>Fantasy is a genre that typically features the use of magic or other supernatural phenomena in the plot, setting, or theme.</td>
+            <td><button onclick="location.href='/edit_genres'">Edit</button></td>
+            <td><button>Delete</button></td>
+        </tr>
+        <tr>
+            <td>Science Fiction</td>
+            <td>Science Fiction is a fictionalized story wherein the setting and plot are centered around technology, time travel, outer space, or scientific principles, with or without the presence of aliens.</td>
+            <td><button onclick="location.href='/edit_genres'">Edit</button></td>
+            <td><button>Delete</button></td>
+        </tr>
+        <tr>
+            <td>Mystery</td>
+            <td>Mystery is a fiction genre where the nature of an event, usually a murder or other crime, remains mysterious until the end of the story.</td>
+            <td><button onclick="location.href='/edit_genres'">Edit</button></td>
+            <td><button>Delete</button></td>
+        </tr>
+      </tbody>
+</table>
+
+<!-- Form for adding a genre-->
+<form>
+    <fieldset>
+    <legend>Add a Genre</legend>
+        
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name">
+    <br>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" rows="4" cols="50"></textarea>
+    <br>
+
+    <button id="blue_button" disabled>Add Genre</button>    
+    </fieldset>
+</form>
