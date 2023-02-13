@@ -115,54 +115,9 @@
 
   </table> 
 
-  <!-- Form for Adding Books -->
-  <form>
-    <fieldset>
-      <legend>Add a Book</legend>
-
-      <label for="title">Title:</label>
-      <input type="text" name="title" id="title">
-      <br>
-
-      <label for="author">Author(s):</label>
-      <select multiple name="author" id="author">
-        <option value="1">J.R.R. Tolkien</option>
-        <option value="2">J.K. Rowling</option>
-        <option value="3">Suzanne Collins</option>
-        <option value="4">Brandon Sanderson</option>
-      </select>
-
-      <br>
-
-      <label for="in_series">Part of a series?</label>
-      <select name="in_series" id="in_series">
-        <option value="True">Yes</option>
-        <option value="False">No</option>
-      </select>
-      <br>
-
-      <label for="series">Series</label>
-      <select name="series" id="series">
-        <option disabled selected value> -- select a series -- </option>
-        <option value="1">Lord of the Rings</option>
-        <option value="2">Harry Potter</option>
-        <option value="3">Hunger Games</option>
-      </select>
-      <br>
-
-      <label for="genre">Genre</label>
-      <select name="genre" id="genre">
-        <option value="1">Fantasy</option>
-        <option value="2">Science Fiction</option>
-        <option value="3">Mystery</option>
-      </select>
-      <br>
-
-      <p>** If author, series or genre was not found, please create them first.</p>
-
-      <button id="blue_button" disabled>Add Book</button>    
-    </fieldset>
-  </form> 
+  <!-- Button to open add book form -->
+  <button onclick="location.href='./add_html/add_book.html'" id="blue_button">Add Book</button>  
+  
 
 </body>
 </html>

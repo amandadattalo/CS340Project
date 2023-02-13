@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../index.css"">
+    <title>CS340 - Book Database</title>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <ul>
+      <li id = "navli"><a href="../index.html">Home</a></li>
+      <li id = "navli"><a href="../books.html">Books</a></li>
+      <li id = "navli"><a href="../authors.html">Authors</a></li>
+      <li id = "navli"><a href="../series.html">Series</a></li>
+      <li id = "navli"><a href="../genres.html">Genres</a></li>
+      <li id = "navli"><a href="../intersection_tables.html">Book and Series to Authors</a></li>
+      </ul>
+  </nav>
+
+   <!-- Header -->
+   <h1>Add Series</h1>
+
+   <!-- Form for Adding Series -->
+  <form>
+    <fieldset>
+      <legend>Add a Series</legend>
+ 
+      <label for="title">Title:</label>
+      <input type="text" name="title" id="title">
+      <!-- <br> -->
+
+      <label for="genre">Genre:</label>
+      <select name="genre" id="genre">
+        <option disabled selected value> -- select a genre -- </option>
+        <option value="1">Fantasy</option>
+        <option value="2">Science Fiction</option>
+        <option value="3">Mystery</option>
+      </select>
+      <br>
+
+      <label>Number of Books in Series:</label>
+      <select name="numOfBooks" id="numOfBooks">
+        <option disabled selected value>0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+      </select>
+      <br>
+
+      <p>** If genre was not found, please create it first.</p>
+
+      <button id="blue_button" disabled>Add Series</button>    
+    </fieldset>
+  </form>
+
+
+</body>
+</html>
