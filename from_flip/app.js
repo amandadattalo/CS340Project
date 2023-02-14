@@ -52,6 +52,28 @@ app.get('/intersection_tables', function(req, res)
     res.render('intersection_tables');
     });
 
+// Add 
+
+app.get('/add_authors', function(req, res)
+    {
+    res.render('add_authors');
+    });
+
+app.get('/add_books', function(req, res)
+    {
+    res.render('add_books');
+    });
+
+app.get('/add_genres', function(req, res)
+    {
+    res.render('add_genres');
+    });
+
+app.get('/add_series', function(req, res)
+    {
+    res.render('add_series');
+    });
+
 // Edit    
 
 app.get('/edit_authors', function(req, res)
