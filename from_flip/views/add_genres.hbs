@@ -1,0 +1,32 @@
+<!-- NAV -->
+<nav>
+    <ul>
+        <li id = "navli"><a href="/">Home</a></li>
+        <li id = "navli"><a href="books">Books</a></li>
+        <li id = "navli"><a href="authors">Authors</a></li>
+        <li id = "navli"><a href="series">Series</a></li>
+        <li id = "navli"><a href="genres">Genres</a></li>
+        <li id = "navli"><a href="intersection_tables">Book and Series to Authors</a></li>
+    </ul>
+</nav>
+
+<!-- Header -->
+<h1>Add Genre</h1>
+
+<!-- Form for adding a genre-->
+<form>
+    <fieldset>
+    <legend>Add a Genre</legend>
+        
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name">
+    <br>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" rows="4" cols="50"></textarea>
+    <br>
+
+    <button id="blue_button" disabled>Add Genre</button>    
+    <button id="blue_button" onclick="window.history.go(-1); return false;">Cancel</button> 
+    </fieldset>
+</form>
