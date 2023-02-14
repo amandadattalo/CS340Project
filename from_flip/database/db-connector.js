@@ -7,7 +7,7 @@ var pool = mysql.createPool({
     host            : 'classmysql.engr.oregonstate.edu',
     user            : 'cs340_[your_onid]',
     password        : '[your_db_password]',
-    database        : 'ccs340_[your_onid]'
+    database        : 'cs340_[your_onid]'
 })
 
 // Export it for use in our application
