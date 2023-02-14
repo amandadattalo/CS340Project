@@ -3,3 +3,6 @@ from_flip/database/*
 
 #ignore node_modules
 from_flip/node_modules
+
+#ignore app.js
+from_flip/app.js
