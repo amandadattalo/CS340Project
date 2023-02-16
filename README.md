@@ -106,7 +106,9 @@ Intersection table to facilitate M:N relationship between Series and Authors
 **Relationship:** a 1:M relationship between Series_Authors and Authors is implemented with author_id as FK inside of Series_Authors. 
 
 
-
 # Entity-Relationship Diagram
 
-![EntityDiagram](./Common/entityRelationship.jpg)
+![EntityDiagram](./from_flip/public/images/erd.jpg)
+
+# Schema
+![SchemaDiagram](./from_flip/public/images/schema.jpg)
