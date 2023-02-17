@@ -34,6 +34,11 @@ FROM Genres;
 INSERT INTO Books (title, in_series, series_id, genre_id)
 VALUES (:titleInput, :in_series_from_dropdown_Input, :series_id_from_dropdown_Input, :genre_id_from_dropdown_Input);
 
+-- Add new book M:N 
+INSERT INTO Books_Authors (book_id, author_id)
+VALUES ((SELECT book_id FROM Books WHERE Books.title = :titleInput), 
+(SELECT author_id FROM Authors WHERE concat_ws("", Authors.first_name, " ", Authors.last_name) = :author_name_from_select_input));
+
 -- Query for editing a book
 -- Edit book
 UPDATE Books
@@ -102,6 +107,11 @@ FROM Genres;
 -- Add new series
 INSERT INTO Series (title, genre_id, series_length)
 VALUES (:titleInput, :genre_id_from_dropdown_Input, :series_length_from_dropdown_Input);
+
+-- Add new series M:N 
+INSERT INTO Series_Authors (series_id, author_id)
+VALUES ((SELECT series_id FROM Series WHERE Series.title = :titleInput), 
+(SELECT author_id FROM Authors WHERE concat_ws("", Authors.first_name, " ", Authors.last_name) = :author_name_from_select_input));
 
 -- Query for editing a series
 -- Edit series
