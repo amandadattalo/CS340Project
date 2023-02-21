@@ -108,7 +108,7 @@ Intersection table to facilitate M:N relationship between Series and Authors
 
 # Entity-Relationship Diagram
 
-![EntityDiagram](./from_flip/public/images/erd.jpg)
+![EntityDiagram](./from_flip/public/images/erd.jpeg)
 
 # Schema
-![SchemaDiagram](./from_flip/public/images/schema.jpg)
+![SchemaDiagram](./from_flip/public/images/schema.jpeg)
