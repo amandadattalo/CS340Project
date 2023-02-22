@@ -13,8 +13,9 @@
 <!-- Header -->
 <h1>Add Book</h1>
 
+
 <!-- Form for adding a book -->
-<form class="popup">
+<form id="add_books" method="POST" action="/add_books">
     <fieldset>
     <legend>Add a Book</legend>
 
@@ -23,6 +24,13 @@
     <br>
 
     <label for="author">Author(s):</label>
+
+    {{!-- <select multiple name="author" id="author">
+        {{#each authors}}
+        <option value="{{this.author_id}}">{{this.last_name}}</option>
+        {{/each}}
+    </select> --}}
+
     <select multiple name="author" id="author">
         <option value="1">J.R.R. Tolkien</option>
         <option value="2">J.K. Rowling</option>
@@ -34,14 +42,20 @@
 
     <label for="in_series">Part of a series?</label>
     <select name="in_series" id="in_series">
-        <option value="True">Yes</option>
-        <option value="False">No</option>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
     </select>
     <br>
 
     <label for="series">Series</label>
     <select name="series" id="series">
         <option disabled selected value> -- select a series -- </option>
+
+
+        {{#each series}}
+        <option value="{{this.series_id}}">{{this.name}}</option>
+        {{/each}}
+
         <option value="1">Lord of the Rings</option>
         <option value="2">Harry Potter</option>
         <option value="3">Hunger Games</option>
@@ -58,7 +72,7 @@
 
     <p>** If author, series or genre was not found, please create them first.</p>
 
-    <button id="blue_button" disabled>Add Book</button>    
+    <input type="submit">   
     <button id="blue_button" onclick="window.history.go(-1); return false;">Cancel</button> 
     </fieldset>
 </form> 
