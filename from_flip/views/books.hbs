@@ -15,7 +15,7 @@
 
 
 {{!-- Create a table --}}
-<table>
+<table id="books_table">
 
     {{!-- Header section --}}
     <thead>
@@ -28,6 +28,8 @@
                 {{@key}}
             </th>
             {{/each}}
+            <th>Delete</th>
+            <th>Edit</th>
         </tr>
     </thead>
 
@@ -35,16 +37,24 @@
     <tbody>
 
         {{#each data}}
-        <tr>
+        <tr data_value = {{this.book_id}}>
+            <td>{{this.book_id}}</td>
             <td>{{this.Title}}</td>
             <td>{{this.Author}}</td>
             <td>{{this.InSeries}}</td>
             <td>{{this.Series}}</td>
             <td>{{this.Genre}}</td>
+            <td><button onclick="deleteBook({{this.book_id}})">Delete</button></td>
+            <td><button onclick="location.href='/edit_books'">Edit</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
 
+{{!-- Connect to delete js file --}}
+<script src="js/delete_book.js"></script>
+
+
 <!-- Button to add book -->
 <button onclick="location.href='add_books'" id="blue_button">Add Book</button> 
+
