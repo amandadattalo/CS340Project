@@ -14,7 +14,7 @@
 <h1>Edit Books</h1>
 
 <!-- Form for editing a book -->
-<form>
+<form id="update_book">
     <fieldset>
         <legend>Edit a Book</legend>
 
@@ -55,7 +55,9 @@
         </select>
         <br>
 
-        <button id="blue_button" disabled>Edit</button>    
+        <input type="submit">    
         <button id="blue_button" onclick="window.history.go(-1); return false;">Cancel</button> 
     </fieldset>
 </form> 
+
+<script src="js/update_book.js"></script>
