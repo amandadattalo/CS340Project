@@ -42,7 +42,7 @@ app.get('/books', function(req, res)
     // res.render('books');
     // });
     {  
-        let query1 = "SELECT Books.title AS Title,  CONCAT('', Authors.first_name, ' ', Authors.last_name) AS Author,  \
+        let query1 = "SELECT Books.book_id, Books.title AS Title,  CONCAT('', Authors.first_name, ' ', Authors.last_name) AS Author,  \
         CASE WHEN Books.in_series then 'Yes' else 'No' end AS InSeries, Series.title AS Series, \
         Genres.name AS Genre \
         FROM Books \
@@ -110,6 +110,7 @@ app.get('/add_books', function(req, res)
 app.post('/add_books', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
+    console.log(data)
 
     // Capture NULL values
     let series = parseInt(data['series']);
@@ -177,6 +178,32 @@ app.get('/edit_books', function(req, res)
     res.render('edit_books');
     });
 
+app.put('/edit_books', function(req, res, next){
+    let data = req.body;
+    console.log(data)
+    
+    let title = parseInt(data.title);
+    let author = parseInt(data.author);
+    
+    let update_title = `UPDATE Books SET Books.title = ? WHERE Books.book_id = 1`;
+
+    
+            // Run the 1st query
+            db.pool.query(update_title, [title], function(error, rows, fields){
+                if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+                }
+    
+                // If there was no error, we run our second query and return that data so we can use it to update the people's
+                // table on the front-end
+                else {
+                    res.redirect('books');
+                }
+    })});    
+
 app.get('/edit_genres', function(req, res)
     {
     res.render('edit_genres');
@@ -186,6 +213,38 @@ app.get('/edit_series', function(req, res)
     {
     res.render('edit_series');
     });
+
+// Delete
+app.delete('/delete_book', function(req, res, next){
+    let data = req.body;
+    let book_id = parseInt(data.id);
+    let delete_books = `DELETE FROM Books WHERE book_id = ?`;
+    let delete_books_authors = `DELETE FROM Books_Authors WHERE book_id = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(delete_books, [book_id], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                  // Run the second query
+                  db.pool.query(delete_books_authors, [book_id], function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.sendStatus(204);
+                      }
+                  })
+              }
+  })});
 
 /*
     LISTENER
