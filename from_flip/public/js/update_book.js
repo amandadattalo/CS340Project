@@ -10,10 +10,19 @@ updateBookForm.addEventListener("submit", function (e) {
     // Get form fields we need to get data from
     let title = document.getElementById("title");
     let author = document.getElementById("author");
+    let in_series = document.getElementById("in_series");
+    let series = document.getElementById("series");
+    let genre = document.getElementById("genre");
+    let book = document.getElementById("book_id");
 
     // Get the values from the form fields
     let titleValue = title.value;
     let authorValue = author.value;
+    let in_seriesValue = in_series.value;
+    let seriesValue = series.value;
+    let genreValue = genre.value;
+    let bookValue = book.value;
+
     
     // currently the database table for bsg_people does not allow updating values to NULL
     // so we must abort if being bassed NULL for homeworld
@@ -30,8 +39,14 @@ updateBookForm.addEventListener("submit", function (e) {
     let data = {
         title: titleValue,
         author: authorValue,
+        in_series: in_seriesValue,
+        series: seriesValue,
+        genre: genreValue,
+        book: bookValue,
     }
-    
+
+    console.log(data)
+
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/edit_books", true);
@@ -39,11 +54,11 @@ updateBookForm.addEventListener("submit", function (e) {
 
     // Tell our AJAX request how to resolve
     xhttp.onreadystatechange = () => {
-        console.log(xhttp.status)
+
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            updateRow(xhttp.response, titleValue);
+            updateRow(xhttp.response, bookValue);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
