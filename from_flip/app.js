@@ -37,47 +37,27 @@ app.get('/authors', function(req, res)
     res.render('authors');
     });
 
-app.get('/books', function(req, res)
-    // {
-    // res.render('books');
-    // });
-    {  
-        let query1 = "SELECT Books.book_id, Books.title AS Title,  CONCAT('', Authors.first_name, ' ', Authors.last_name) AS Author,  \
-        CASE WHEN Books.in_series then 'Yes' else 'No' end AS InSeries, Series.title AS Series, \
-        Genres.name AS Genre \
-        FROM Books \
-        JOIN Books_Authors \
-        ON Books.book_id = Books_Authors.book_id \
-        JOIN Authors \
-        ON Books_Authors.author_id = Authors.author_id \
-        JOIN Genres \
-        ON Books.genre_id = Genres.genre_id \
-        LEFT JOIN Series \
-        ON Books.series_id = Series.series_id;"
+app.get('/books', function(req, res) 
+{  
+    let query1 = "SELECT Books.book_id, Books.title AS Title,  CONCAT('', Authors.first_name, ' ', Authors.last_name) AS Author,  \
+    CASE WHEN Books.in_series then 'Yes' else 'No' end AS InSeries, Series.title AS Series, \
+    Genres.name AS Genre \
+    FROM Books \
+    JOIN Books_Authors \
+    ON Books.book_id = Books_Authors.book_id \
+    JOIN Authors \
+    ON Books_Authors.author_id = Authors.author_id \
+    JOIN Genres \
+    ON Books.genre_id = Genres.genre_id \
+    LEFT JOIN Series \
+    ON Books.series_id = Series.series_id;"
 
-        let query2 = "SELECT * FROM Authors;";
-        let query3 = "SELECT * FROM Series;";
-        let query4 = "SELECT * FROM Genres;";
+    db.pool.query(query1, function(error, rows, fields){ 
 
-        db.pool.query(query2, function(error, rows, fields){    
-            let authors = rows;
+        res.render('books', {data: rows});  
 
-            db.pool.query(query3, function(error, rows, fields){  
-                let series = rows;
-
-                db.pool.query(query4, function(error, rows, fields){  
-                    let genres = rows;
-
-                    db.pool.query(query1, function(error, rows, fields){  
-                        
-                        res.render('books', {data: rows, authors: authors, series:series, genres:genres});  
-                     
-                    })
-                })        
-            })
-            
-        })                                                      
-    }); 
+    })         
+});
 
 
 app.get('/genres', function(req, res)
@@ -102,28 +82,26 @@ app.get('/add_authors', function(req, res)
     res.render('add_authors');
     });
 
+
 app.get('/add_books', function(req, res)
 {
-    let query3 = "SELECT * FROM Authors;";
-    let query4 = "SELECT * FROM Series;";
-    let query5 = "SELECT * FROM Genres;";
+    let query1 = "SELECT * FROM Authors;";
+    let query2 = "SELECT * FROM Series;";
+    let query3 = "SELECT * FROM Genres;";
 
-    db.pool.query(query3, function(error, rows, fields){
+    db.pool.query(query1, function(error, rows, fields){    
         let authors = rows
 
-        db.pool.query(query4, function(error, rows, fields){
+        db.pool.query(query2, function(error, rows, fields){  
             let series = rows
 
-            db.pool.query(query5, function(error, rows, fields){
+            db.pool.query(query3, function(error, rows, fields){  
                 let genres = rows
 
                 res.render('add_books', {authors: authors, series: series, genres: genres});
             })
-            
         })
-        
     })
-    
 });
 
 app.post('/add_books', function(req, res){
@@ -194,33 +172,59 @@ app.get('/edit_authors', function(req, res)
 
 app.get('/edit_books', function(req, res)
     {
-    res.render('edit_books');
-    });
+        let query1 = "SELECT * FROM Books;";
+        let query2 = "SELECT * FROM Authors;";
+        let query3 = "SELECT * FROM Series;";
+        let query4 = "SELECT * FROM Genres;";
+    
+        db.pool.query(query1, function(error, rows, fields){    
+            let books = rows;
+    
+            db.pool.query(query2, function(error, rows, fields){  
+                let authors = rows;
+    
+                db.pool.query(query3, function(error, rows, fields){  
+                    let series = rows;
+
+                    db.pool.query(query4, function(error, rows, fields){  
+                        let genres = rows;    
+
+                    res.render('edit_books', {books: books, authors: authors, series: series, genres: genres});
+                })
+            })
+        })
+    })
+});
 
 app.put('/edit_books', function(req, res, next){
     let data = req.body;
-    console.log(data)
     
-    let title = parseInt(data.title);
-    let author = parseInt(data.author);
-    
-    let update_title = `UPDATE Books SET Books.title = ? WHERE Books.book_id = 1`;
 
+    // let title = parseInt(data.title);
+    let author = parseInt(data.author);
+    let series = parseInt(data.series);
+    let in_series = parseInt(data.in_series);
+    let genre = parseInt(data.genre);
+    let book = parseInt(data.book);
     
-            // Run the 1st query
-            db.pool.query(update_title, [title], function(error, rows, fields){
-                if (error) {
-    
-                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                console.log(error);
-                res.sendStatus(400);
-                }
-    
-                // If there was no error, we run our second query and return that data so we can use it to update the people's
-                // table on the front-end
-                else {
-                    res.redirect('books');
-                }
+    let update_series = `UPDATE Books \
+    SET series_id = ?, genre_id = ? \
+    WHERE Books.book_id = ?`;
+
+        // Run the 1st query
+        db.pool.query(update_series, [series, genre, book], function(error, rows, fields){
+            if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error);
+            res.sendStatus(400);
+            }
+
+            // If there was no error, we run our second query and return that data so we can use it to update the people's
+            // table on the front-end
+            else {
+                res.sendStatus(200);
+            }
     })});    
 
 app.get('/edit_genres', function(req, res)
