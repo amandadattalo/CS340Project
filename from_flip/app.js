@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 
-PORT        = 8034;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 8051;                 // Set a port number at the top so it's easy to change in the future
 
 // Database
 var db = require('./database/db-connector')
@@ -103,8 +103,27 @@ app.get('/add_authors', function(req, res)
     });
 
 app.get('/add_books', function(req, res)
-    {
-    res.render('add_books');
+{
+    let query3 = "SELECT * FROM Authors;";
+    let query4 = "SELECT * FROM Series;";
+    let query5 = "SELECT * FROM Genres;";
+
+    db.pool.query(query3, function(error, rows, fields){
+        let authors = rows
+
+        db.pool.query(query4, function(error, rows, fields){
+            let series = rows
+
+            db.pool.query(query5, function(error, rows, fields){
+                let genres = rows
+
+                res.render('add_books', {authors: authors, series: series, genres: genres});
+            })
+            
+        })
+        
+    })
+    
 });
 
 app.post('/add_books', function(req, res){
