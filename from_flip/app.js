@@ -20,8 +20,8 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 
 const path = require("path")
 
-
 app.use(express.static('public')); 
+var success = 0
 
 /*
     ROUTES
@@ -117,7 +117,7 @@ app.get('/add_books', function(req, res)
             db.pool.query(query5, function(error, rows, fields){
                 let genres = rows
 
-                res.render('add_books', {authors: authors, series: series, genres: genres});
+                res.render('add_books', {authors: authors, series: series, genres: genres, success: 0});
             })
             
         })
@@ -166,8 +166,30 @@ app.post('/add_books', function(req, res){
             }
             // If there was no error, we redirect back
             else {
-                res.redirect('books');
+                console.log("Book was inserted successfully");
+                let query3 = "SELECT * FROM Authors;";
+                let query4 = "SELECT * FROM Series;";
+                let query5 = "SELECT * FROM Genres;";
+
+                db.pool.query(query3, function(error, rows, fields){
+                    let authors = rows
+
+                    db.pool.query(query4, function(error, rows, fields){
+                        let series = rows
+
+                        db.pool.query(query5, function(error, rows, fields){
+                            let genres = rows
+                            success = 1
+                            res.render('add_books', {authors: authors, series: series, genres: genres, success : success});
+                        })
+                        
+                    })
+                    
+                })
+    
             }
+                
+
             })
         }
     })
