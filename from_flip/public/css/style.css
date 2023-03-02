@@ -154,6 +154,10 @@ img {
 
 
 /* Tables */
+#edit, #delete{
+    width: 70px;
+}
+
 table {
     border-collapse: collapse;
     /* margin: 25px 0; */
@@ -187,45 +191,47 @@ tbody tr:last-of-type {
 }
 
 @media (max-width: 900px) {
-    .books_table{
+    #books_table{
         margin-right: 20px;
         margin-left: 20px;
     }
 }
 
-@media (max-width: 660px) {
+@media (max-width: 700px) {
     th, td {
         padding: 6px 7px;
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 600px) {
     th, td {
         padding: 6px 7px;
     }
-    .books_table{
+    #books_table{
         font-size: 12px;
     }
 
-    .books_button{
+    #edit, #delete{
         font-size: 12px;
+        width: 50px;
     }
 }
 
 @media (max-width: 490px) {
-    .books_table{
+    #books_table{
         margin-right: 20px;
         margin-left: 20px;
     }
     th, td {
         padding: 3px 4px;
     }
-    .books_table{
+    #books_table{
         font-size: 12px;
     }
 
-    .books_button{
+    #edit, #delete{
         font-size: 12px;
+        width: 50px;
     }
 }
 
@@ -242,37 +248,32 @@ form {
     text-align: center;
 }
    
-  /* input,
-  textarea {
-    padding: 1px;
-    margin: 5px;
-    width: 35%;
-    border: 1px solid;
-  } */
 
 input, select, textarea {
-width: 100%;
-padding: 5px 20px;
-margin: 5px 0;
-display: inline-block;
-border: 1px solid gray;
-border-radius: 4px;
-box-sizing: border-box;
+    width: 100%;
+    padding: 5px 20px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid gray;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 #blue_button {
-margin: 5px;
-padding: 5px 20px;
-cursor: pointer;
-background-color: #1b66c9;
-color: white;
-border-radius: 4px;
-border: 1px solid transparent;
+    width: 110px;
+    text-align: center;
+    margin: 5px;
+    padding: 5px 20px;
+    cursor: pointer;
+    background-color: #1b66c9;
+    color: white;
+    border-radius: 4px;
+    border: 1px solid transparent;
 }
 
 
 #blue_button:hover {
-background-color: #1a73e8;
+    background-color: #1a73e8;
 }
  
 
@@ -340,8 +341,8 @@ background-color: #1a73e8;
 
 /* Footer */
 footer {
-justify-content: center;
-padding: 5px;
-background-color: #DC4405;
-color: white;
+    justify-content: center;
+    padding: 5px;
+    background-color: #DC4405;
+    color: white;
 }
