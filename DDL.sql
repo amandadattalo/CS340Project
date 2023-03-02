@@ -37,7 +37,7 @@ CREATE TABLE Series (
 CREATE TABLE Books (
     book_id int UNIQUE NOT NULL AUTO_INCREMENT,
     title varchar(255) NOT NULL,
-    in_series bool NOT NULL,
+    in_series tinyint NOT NULL,
     series_id int,
     genre_id int NOT NULL,
     PRIMARY KEY (book_id),
