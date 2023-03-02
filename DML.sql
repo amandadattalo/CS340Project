@@ -3,56 +3,55 @@
 -- #########################
 
 -- Query for Books table 
-SELECT Books.title AS Title,  CONCAT("", Authors.first_name, " ", Authors.last_name) AS Author, 
-CASE WHEN Books.in_series then 'Yes' else 'No' end InSeries,
-Series.title AS Series, 
-Genres.name AS Genre
-FROM Books
-JOIN Books_Authors
-ON Books.book_id = Books_Authors.book_id
-JOIN Authors
-ON Books_Authors.author_id = Authors.author_id
-JOIN Genres
-ON Books.genre_id = Genres.genre_id
-LEFT JOIN Series
-ON Books.series_id = Series.series_id;
+SELECT Books.book_id, Books.title AS Title, 
+GROUP_CONCAT(CONCAT(Authors.first_name, ' ', Authors.last_name) SEPARATOR ', ') AS Author, 
+CASE WHEN Books.in_series then 'Yes' else 'No' end AS InSeries, Series.title AS Series, 
+Genres.name AS Genre 
+FROM Books 
+JOIN Books_Authors ON Books.book_id = Books_Authors.book_id 
+JOIN Authors ON Books_Authors.author_id = Authors.author_id 
+JOIN Genres ON Books.genre_id = Genres.genre_id 
+LEFT JOIN Series ON Books.series_id = Series.series_id 
+GROUP BY Books.book_id;
 
 -- Query for adding a new book
--- Author select options
-SELECT concat_ws("", Authors.first_name, " ", Authors.last_name) AS Author
-FROM Authors;
-
--- Series dropdown options
-SELECT Series.title AS Series
-FROM Series;
-
--- Genre dropdown options
-SELECT Genres.name AS Genre
-FROM Genres;
+-- Form queries
+SELECT author_id, first_name, last_name FROM Authors;
+SELECT series_id, title FROM Series;
+SELECT genre_id, name FROM Genres;
 
 -- Add new book 
-INSERT INTO Books (title, in_series, series_id, genre_id)
-VALUES (:titleInput, :in_series_from_dropdown_Input, :series_id_from_dropdown_Input, :genre_id_from_dropdown_Input);
+INSERT INTO Books (title, in_series, series_id, genre_id) 
+VALUES (:title, :in_series, :series_id, :genre_id)
+
+-- Get book_id from newly inserted book
+SELECT book_id FROM Books WHERE Books.title = :title
 
 -- Add new book M:N 
-INSERT INTO Books_Authors (book_id, author_id)
-VALUES ((SELECT book_id FROM Books WHERE Books.title = :titleInput), 
-(SELECT author_id FROM Authors WHERE concat_ws("", Authors.first_name, " ", Authors.last_name) = :author_name_from_select_input));
+INSERT INTO Books_Authors (book_id, author_id) VALUES (:book_id, :author_id)
 
 -- Query for editing a book
+-- Form queries
+SELECT book_id FROM Books;
+SELECT author_id, first_name, last_name FROM Authors;
+SELECT series_id, title FROM Series;
+SELECT genre_id, name FROM Genres;
+
 -- Edit book
-UPDATE Books
-SET title = :titleInput, in_series = :in_series_from_dropdown_Input, series_id = :series_id_from_dropdown_Input, genre_id = :genre_id_from_dropdown_Input
-WHERE id = :book_id_from_the_update_form;
+UPDATE Books 
+SET title = :title, in_series = :in_series, series_id = :series_id, genre_id = :genre_id
+WHERE Books.book_id = :book_id
+
+DELETE FROM Books_Authors WHERE book_id = :book_id
+
+INSERT INTO Books_Authors (book_id, author_id) VALUES (:book_id, :author_id)
 
 -- Query for deleting a book
 -- Delete book
-DELETE FROM Books
-WHERE id = :book_id_selected_from_browse_delete_page;
+DELETE FROM Books WHERE book_id = :book_id
 
 -- Delete book M:N
-DELETE FROM Books_Authors
-WHERE id = :book_id_selected_from_browse_delete_page;
+DELETE FROM Books_Authors WHERE book_id = :book_id
 
 
 -- #########################
