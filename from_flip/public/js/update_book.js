@@ -1,80 +1,44 @@
-// Get the objects we need to modify
-let updateBookForm = document.getElementById('update_book');
+// get the form and add a submit event listener
+const form = document.querySelector('#update_book');
+form.addEventListener('submit', updateBook);
 
-// Modify the objects we need
-updateBookForm.addEventListener("submit", function (e) {
-   
-    // Prevent the form from submitting
-    e.preventDefault();
+function updateBook(event) {
+    event.preventDefault(); // prevent the default form submission
 
-    // Get form fields we need to get data from
-    let title = document.getElementById("title");
-    let author = document.getElementById("author");
-
-    // Get the values from the form fields
-    let titleValue = title.value;
-    let authorValue = author.value;
+    // extract book)id from the query parameter (in the URL)
+    const urlParams = new URLSearchParams(window.location.search); 
     
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for homeworld
+    let book_id = urlParams.get('book_id');
+    let title = document.querySelector('#title').value;
+    let authors = [...document.querySelector('#author').options]
+        .filter(option => option.selected)
+        .map(option => option.value);
+    let in_series = document.querySelector('#in_series').value;
+    let series = document.querySelector('#series').value;
+    let genre = document.querySelector('#genre').value;
 
-    // Not working with below if statement
+    // create an XMLHttpRequest object
+    let xhr = new XMLHttpRequest();
 
-    // if (isNaN(titleValue)) 
-    // {
-    //     return;
-    // }
+    // set the request method and URL
+    xhr.open('PUT', `/edit_books`);
 
+    // set the request header to specify the content type
+    xhr.setRequestHeader('Content-Type', 'application/json');
 
-    // Put our data we want to send in a javascript object
-    let data = {
-        title: titleValue,
-        author: authorValue,
-    }
-    
-    // Setup our AJAX request
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("PUT", "/edit_books", true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-
-    // Tell our AJAX request how to resolve
-    xhttp.onreadystatechange = () => {
-        console.log(xhttp.status)
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-
-            // Add the new data to the table
-            updateRow(xhttp.response, titleValue);
-
+    // set the onload function to handle the response
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+        alert("Book was edited successfully!");
+        window.location.href = '/books'; // redirect to /books
+        } else {
+        console.log('Error: ' + xhr.status);
+        alert('Something went wrong. Please ensure that all the required fields are selected.');
+        
         }
-        else if (xhttp.readyState == 4 && xhttp.status != 200) {
-            console.log("There was an error with the input.")
-        }
-    }
+    };
 
-    // Send the request and wait for the response
-    xhttp.send(JSON.stringify(data));
-
-})
-
-
-function updateRow(data, book_id){
-    let parsedData = JSON.parse(data);
-    
-    let table = document.getElementById("books_table");
-
-    for (let i = 0, row; row = table.rows[i]; i++) {
-       //iterate through rows
-       //rows would be accessed using the "row" variable assigned in the for loop
-       if (table.rows[i].getAttribute("data_value") == book_id) {
-
-            // Get the location of the row where we found the matching person ID
-            let updateRowIndex = table.getElementsByTagName("tr")[i];
-
-            // Get td of homeworld value
-            let td = updateRowIndex.getElementsByTagName("td")[3];
-
-            // Reassign homeworld to our value we updated to
-            td.innerHTML = parsedData[0].name; 
-       }
-    }
+    // set the request body to send the book data as JSON
+    let data = JSON.stringify({book_id, title, authors, in_series, series, genre});
+    xhr.send(data);
 }
