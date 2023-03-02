@@ -1,10 +1,3 @@
-<!-- Message for a book being successfully added -->
-{{#if success}}
-    <button id="addMessage">
-    Added successfully</button>
-{{/if}}
-
-
 <!-- NAV -->
   <nav>
     <ul>
@@ -20,9 +13,8 @@
 <!-- Header -->
 <h1>Add Book</h1>
 
-
 <!-- Form for adding a book -->
-<form id="add_books" method="POST" action="/add_books">
+<form id="add_books">
     <fieldset>
     <legend>Add a Book</legend>
 
@@ -32,26 +24,23 @@
 
     <label for="author">Author(s):</label>
 
-    <select name="author" id="author">
+    <select multiple name="author" id="author">
         {{#each authors}}
         <option value="{{this.author_id}}">{{this.first_name}} {{this.last_name}}</option>
         {{/each}}
     </select>
-
     <br>
 
     <label for="in_series">Part of a series?</label>
     <select name="in_series" id="in_series">
-        <option value="1">Yes</option>
         <option value="0">No</option>
+        <option value="1">Yes</option>
     </select>
     <br>
 
     <label for="series">Series</label>
     <select name="series" id="series">
-        <option disabled selected value> -- select a series -- </option>
-
-
+        <option value = ''>Not part of a series</option>
         {{#each series}}
         <option value="{{this.series_id}}">{{this.title}}</option>
         {{/each}}
@@ -68,7 +57,7 @@
 
     <p>** If author, series or genre was not found, please create them first.</p>
 
-    <input id="blue_button" type="submit">   
+    <input type="submit" id="blue_button" value="Add a Book">   
     <button id="blue_button" onclick="window.history.go(-1); return false;">Cancel</button> 
     </fieldset>
 </form> 
