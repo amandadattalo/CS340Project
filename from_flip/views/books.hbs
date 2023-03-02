@@ -13,39 +13,33 @@
 <!-- Header -->
 <h1>Books</h1>
 
-
 {{!-- Create a table --}}
 <table id="books_table">
 
     {{!-- Header section --}}
-    <thead>
-
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-            <th>Delete</th>
-            <th>Edit</th>
-        </tr>
-    </thead>
+  <thead>
+    <tr>
+        {{#each data.[0]}}
+            {{#unless @first}}
+                <th>{{@key}}</th>
+            {{/unless}}
+        {{/each}}
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+</thead>
 
     {{!-- Body section --}}
     <tbody>
-
         {{#each data}}
         <tr data_value = {{this.book_id}}>
-            <td>{{this.book_id}}</td>
             <td>{{this.Title}}</td>
             <td>{{this.Author}}</td>
             <td>{{this.InSeries}}</td>
             <td>{{this.Series}}</td>
             <td>{{this.Genre}}</td>
-            <td><button onclick="deleteBook({{this.book_id}})">Delete</button></td>
-            <td><button onclick="location.href='/edit_books'">Edit</button></td>
+            <td><button id="edit" onclick="location.href='/edit_books?book_id={{this.book_id}}'">Edit</button></td>
+            <td><button id='delete', onclick="deleteBook({{this.book_id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
@@ -54,7 +48,5 @@
 {{!-- Connect to delete js file --}}
 <script src="js/delete_book.js"></script>
 
-
 <!-- Button to add book -->
 <button onclick="location.href='add_books'" id="blue_button">Add Book</button> 
-
