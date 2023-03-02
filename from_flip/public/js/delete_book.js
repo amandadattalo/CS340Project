@@ -4,8 +4,6 @@ function deleteBook(book_id) {
         id: book_id
     };
 
-    console.log(data)
-
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("DELETE", "/delete_book", true);
