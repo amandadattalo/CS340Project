@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 
-PORT        = 8031;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 8051;                 // Set a port number at the top so it's easy to change in the future
 
 // Database
 var db = require('./database/db-connector')
@@ -31,10 +31,14 @@ app.get('/', function(req, res)
     });
 
 
-app.get('/authors', function(req, res)
-    {
-    res.render('authors');
-    });
+app.get('/authors', function(req, res){
+    let display_authors = "SELECT Authors.author_id, Authors.first_name AS First, Authors.last_name AS Last \
+                        FROM Authors;"
+
+    db.pool.query(display_authors, function(error, rows, fields) { 
+        res.render('authors', {data: rows});  
+    })  
+});
 
 app.get('/books', function(req, res) {  
     let display_books = "SELECT Books.book_id, Books.title AS Title, \
@@ -71,11 +75,52 @@ app.get('/intersection_tables', function(req, res)
 
 // Add 
 
-app.get('/add_authors', function(req, res)
-    {
+app.get('/add_authors', function(req, res){
     res.render('add_authors');
-    });
+});
 
+app.post('/add_authors', function(req, res){
+    let data = req.body;
+    console.log(data);
+
+    if(!data.first_name || !data.last_name){
+        res.status(400).send("Error adding author to the database");
+        return;
+    }
+
+    const first_name = data.first_name;
+    const last_name = data.last_name;
+
+    let insert_author = `INSERT INTO Authors (first_name, last_name) VALUES (?, ?)`;
+
+    db.pool.query(insert_author, [first_name, last_name], function(error, rows, fields){
+        if (error){
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else {
+            res.sendStatus(200);
+        }
+    })
+});
+
+app.delete('/delete_author', function(req, res){
+    let data = req.body;
+    let author_id = parseInt(data.id);
+
+    //Query to delete from Authors
+    let delete_author = `DELETE FROM Authors WHERE author_id = ?`;
+
+    // Delete from Authors
+    db.pool.query(delete_author, [author_id], function(error, rows, fields){
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    })
+});
 
 app.get('/add_books', function(req, res)
 {

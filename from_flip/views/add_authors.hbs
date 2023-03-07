@@ -14,7 +14,7 @@
 <h1>Authors</h1>
 
 <!-- Form for adding an author -->
-<form>
+<form id="add_authors">
     <fieldset>
         <legend>Add an Author</legend>
 
@@ -26,7 +26,9 @@
         <input name="last_name" id="last_name">
         <br>
 
-        <button id="blue_button" disabled>Add Author</button>
+        <input type="submit" id="blue_button" value="Add Author"> 
         <button id="blue_button" onclick="window.history.go(-1); return false;">Cancel</button>  
     </fieldset>
 </form> 
+
+<script src="js/add_author.js"></script>

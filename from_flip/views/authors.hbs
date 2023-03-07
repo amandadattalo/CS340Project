@@ -14,42 +14,35 @@
 <h1>Authors</h1>
 
 <!-- Table -->
-<table>
+{{!-- Create a table --}}
+<table id="authors_table">
+    {{!-- Header section --}}
     <thead>
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
+        {{#each data.[0]}}
+            {{#unless @first}}
+                <th>{{@key}}</th>
+            {{/unless}}
+        {{/each}}
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
     </thead>
+    {{!-- Body section --}}
     <tbody>
-        <tr>
-            <td>J.R.R.</td>
-            <td>Tolkien</td>
-            <td><button onclick="location.href='/edit_authors'">Edit</button></td>
-            <td><button>Delete</button></td>
+        {{#each data}}
+        <tr data_value = {{this.author_id}}>
+            <td>{{this.First}}</td>
+            <td>{{this.Last}}</td>
+            <td><button id="edit" onclick="location.href='/edit_authors?author_id={{this.author_id}}'">Edit</button></td>
+            <td><button id='delete', onclick="deleteAuthor({{this.author_id}})">Delete</button>
         </tr>
-        <tr>
-            <td>J.K.</td>
-            <td>Rowling</td>
-            <td><button onclick="location.href='/edit_authors'">Edit</button></td>
-            <td><button>Delete</button></td>
-        </tr>
-        <tr>
-            <td>Suzanne</td>
-            <td>Collins</td>
-            <td><button onclick="location.href='/edit_authors'">Edit</button></td>
-            <td><button>Delete</button></td>
-        </tr>
-        <tr>
-            <td>Brandon</td>
-            <td>Sanderson</td>
-            <td><button onclick="location.href='/edit_authors'">Edit</button></td>
-            <td><button>Delete</button></td>
-        </tr>
+        {{/each}}
     </tbody>
 </table>
+
+{{!-- Connect to delete js file --}}
+<script src="js/delete_author.js"></script>
 
 <!-- Button to add author -->
 <button onclick="location.href='add_authors'" id="blue_button">Add Author</button> 
