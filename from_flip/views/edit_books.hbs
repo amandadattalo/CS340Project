@@ -17,39 +17,56 @@
 <form id="update_book">
     <fieldset>
         <legend>Edit a Book</legend>
-
         <label for="title">Title:</label>
-        <input type="text" name="title" id="title">
+        <input type="text" name="title" id="title" value="{{curr_book_title}}">
         <!-- <br> -->
 
         <label for="author">Author(s):</label>
         <select multiple name="author" id="author">
-        {{#each authors}}
-        <option value="{{this.author_id}}">{{this.first_name}} {{this.last_name}}</option>
-        {{/each}}
+            {{#each authors}}
+                {{#if (inList this.author_id ../curr_authors)}}
+                    <option value="{{this.author_id}}" selected>{{this.first_name}} {{this.last_name}}</option>
+                {{else}}
+                    <option value="{{this.author_id}}">{{this.first_name}} {{this.last_name}}</option>
+                {{/if}}
+            {{/each}}
         </select>
         <br>
 
         <label for="in_series">Part of a series?</label>
         <select name="in_series" id="in_series">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
+            {{#if curr_in_series}}
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            {{else}}
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            {{/if}}
         </select>
         <!-- <br> -->
 
         <label for="series">Series</label>
-        <select name="series" id="series">
-            <option value = ''>Not part of a series</option>
+        <select name="series" id="series">          
+            <option value="">Not part of a series</option>
             {{#each series}}
-            <option value="{{this.series_id}}">{{this.title}}</option>
+                {{#if (eq this.title ../curr_series_title)}}
+                    <option value="{{this.series_id}}" selected>{{this.title}}</option>
+                {{else}}
+                    <option value="{{this.series_id}}">{{this.title}}</option>
+                {{/if}}
             {{/each}}
         </select>
+
         <!-- <br> -->
 
         <label for="genre">Genre</label>
         <select name="genre" id="genre">
             {{#each genres}}
-            <option value="{{this.genre_id}}">{{this.name}}</option>
+                {{#if (eq this.name ../curr_genre)}}
+                    <option value="{{this.genre_id}}" selected>{{this.name}}</option>
+                {{else}}
+                    <option value="{{this.genre_id}}">{{this.name}}</option>
+                {{/if}}
             {{/each}}
         </select>
         <br>
