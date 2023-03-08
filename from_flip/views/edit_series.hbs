@@ -14,49 +14,46 @@
 <h1>Edit Series</h1>
 
 <!-- Form for editing a series -->
-<form>
+<form id="update_series">
     <fieldset>
         <legend>Edit a Series</legend>
 
         <label for="title">Title:</label>
-        <input type="text" name="title" id="title">
+        <input type="text" name="title" id="title" value="{{curr_series_title}}">
         <!-- <br> -->
+
+        <label for="author">Author(s):</label>
+        <select multiple name="author" id="author">
+            {{#each authors}}
+                {{#if (inList this.author_id ../curr_authors)}}
+                    <option value="{{this.author_id}}" selected>{{this.first_name}} {{this.last_name}}</option>
+                {{else}}
+                    <option value="{{this.author_id}}">{{this.first_name}} {{this.last_name}}</option>
+                {{/if}}
+            {{/each}}
+        </select>
+
+        <br>
 
         <label for="genre">Genre:</label>
         <select name="genre" id="genre">
-            <option disabled selected value> -- select a genre -- </option>
-            <option value="1">Fantasy</option>
-            <option value="2">Science Fiction</option>
-            <option value="3">Mystery</option>
+            {{#each genres}}
+                {{#if (eq this.name ../curr_genre)}}
+                    <option value="{{this.genre_id}}" selected>{{this.name}}</option>
+                {{else}}
+                    <option value="{{this.genre_id}}">{{this.name}}</option>
+                {{/if}}
+            {{/each}}
         </select>
         <br>
 
-        <label>Number of Books in Series:</label>
-        <select name="numOfBooks" id="numOfBooks">
-            <option disabled selected value>0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-            <option value="17">17</option>
-            <option value="18">18</option>
-            <option value="19">19</option>
-        </select>
+        <label for="numOfBooks">Number of Books in Series:</label>
+        <input type="number" name="numOfBooks" id="numOfBooks" min="1" max="100" value="{{curr_series_length}}">
         <br>
 
-        <button id="blue_button" disabled>Edit Series</button>  
+        <input type="submit" id="blue_button" value="Edit Series"> 
         <button id="blue_button" onclick="window.history.go(-1); return false;">Cancel</button>   
     </fieldset>
 </form>
+
+<script src="js/update_series.js"></script>
