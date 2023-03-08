@@ -13,34 +13,38 @@
 <!-- Header -->
 <h1>Series</h1>
 
-<!-- Table -->
-<table>
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Genre</th>
-            <th>Series Length</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
+{{!-- Create a table --}}
+<table id="series_table">
+
+    {{!-- Header section --}}
+  <thead>
+    <tr>
+        {{#each data.[0]}}
+            {{#unless @first}}
+                <th>{{@key}}</th>
+            {{/unless}}
+        {{/each}}
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+</thead>
+
+    {{!-- Body section --}}
     <tbody>
-        <tr>
-            <td>Lord of the Rings</td>
-            <td>Fantasy</td>
-            <td>3</td>
-            <td><button onclick="location.href='/edit_series'">Edit</button></td>
-            <td><button>Delete</button></td>
+        {{#each data}}
+        <tr data_value = {{this.series_id}}>
+            <td>{{this.Title}}</td>
+            <td>{{this.Genre}}</td>
+            <td>{{this.Series_Length}}</td>
+            <td><button id="edit" onclick="location.href='/edit_series?series_id={{this.series_id}}'">Edit</button></td>
+            <td><button id='delete', onclick="deleteSeries({{this.series_id}})">Delete</button></td>
         </tr>
-        <tr>
-            <td>The Stormlight Archive</td>
-            <td>Fantasy</td>
-            <td>4 (for now)</td>
-            <td><button onclick="location.href='/edit_series'">Edit</button></td>
-            <td><button>Delete</button></td>
-        </tr>
+        {{/each}}
     </tbody>
 </table>
+
+{{!-- Connect to delete js file --}}
+<script src="js/delete_series.js"></script>
 
 <!-- Button to add series-->
 <button onclick="location.href='add_series'" id="blue_button">Add Series</button> 
