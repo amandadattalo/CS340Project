@@ -91,41 +91,40 @@ WHERE id = :author_id_selected_from_browse_delete_page;
 -- #########################
 
 -- Query for Series table 
-SELECT Books.title AS Title, Genres.name AS Genre, Series.series_length AS Series_Length
-FROM Series
-JOIN Books 
-ON Series.series_id = Books.series_id
-JOIN Genres
-ON Books.genre_id = Genres.genre_id;
+SELECT Series.series_id, Series.title AS Title, Genres.name AS Genre, 
+Series.series_length AS `Series_Length` 
+FROM Series 
+JOIN Genres ON Series.genre_id = Genres.genre_id;
 
 -- Query for adding a new series
--- Genre dropdown options
-SELECT Genres.name AS Genre
-FROM Genres;
+-- Form queries
+SELECT author_id, first_name, last_name FROM Authors;
+SELECT Genres.name FROM Genres;
 
 -- Add new series
-INSERT INTO Series (title, genre_id, series_length)
-VALUES (:titleInput, :genre_id_from_dropdown_Input, :series_length_from_dropdown_Input);
+INSERT INTO Series (title, genre_id, series_length) VALUES (:title, :genre_id, :series_length);
+
+-- Get series_id from newly inserted series
+SELECT series_id FROM Series WHERE Series.title = :title
 
 -- Add new series M:N 
-INSERT INTO Series_Authors (series_id, author_id)
-VALUES ((SELECT series_id FROM Series WHERE Series.title = :titleInput), 
-(SELECT author_id FROM Authors WHERE concat_ws("", Authors.first_name, " ", Authors.last_name) = :author_name_from_select_input));
+INSERT INTO Series_Authors (series_id, author_id) VALUES (:series_id, :author_id)
 
 -- Query for editing a series
 -- Edit series
-UPDATE Series
-SET title = :titleInput, genre_id = :genre_id_from_dropdown_Input, series_length = :series_length_from_dropdown_Input
-WHERE id = :series_id_from_the_update_form;
+UPDATE Series SET title = :title, genre_id = :genre_id, series_length = :series_length
+WHERE Series.series_id = series_id;
+
+DELETE FROM Series_Authors WHERE series_id = :series_id;
+
+INSERT INTO Series_Authors (series_id, author_id) VALUES (:series_id, author_id);
 
 -- Query for deleting a series
 -- Delete series
-DELETE FROM Series
-WHERE id = :series_id_selected_from_browse_delete_page;
+DELETE FROM Series WHERE series_id = :series_id
 
 -- Delete series M:N
-DELETE FROM Series_Authors
-WHERE id = :series_id_selected_from_browse_delete_page;
+DELETE FROM Series_Authors WHERE serie_id = :series_id;
 
 
 -- #########################
@@ -133,24 +132,19 @@ WHERE id = :series_id_selected_from_browse_delete_page;
 -- #########################
 
 -- Query for Genres table 
-SELECT Genres.name AS Name, Genres.description AS Description
-FROM Genres;
+SELECT Genres.genre_id, Genres.name AS Name, Genres.description AS Description FROM Genres;
 
 -- Query for adding a new genre
 -- Add new genre
-INSERT INTO Genres (name, description)
-VALUES (:nameInput, :descriptionInput);
+INSERT INTO Genres (name, description) VALUES (:name, :description);
 
 -- Query for editing a genre
 -- Edit genre
-UPDATE Genres
-SET name = :nameInput, description = :descriptionInput
-WHERE id = :genre_id_from_the_update_form;
+UPDATE Genres SET name = :name, description = :description WHERE Genres.genre_id = :genre_id;
 
 -- Query for deleting a genre
 -- Delete genre
-DELETE FROM Genres
-WHERE id = :genre_id_selected_from_browse_delete_page;
+DELETE FROM Genres WHERE genre_id = :genre_id;
 
 
 -- #########################
