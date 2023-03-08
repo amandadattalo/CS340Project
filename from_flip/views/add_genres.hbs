@@ -14,19 +14,21 @@
 <h1>Add Genre</h1>
 
 <!-- Form for adding a genre-->
-<form>
+<form id="add_genres">
     <fieldset>
-    <legend>Add a Genre</legend>
-        
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name">
-    <br>
+        <legend>Add a Genre</legend>
+            
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name">
+        <br>
 
-    <label for="description">Description:</label>
-    <textarea id="description" name="description" rows="4" cols="50"></textarea>
-    <br>
+        <label for="description">Description:</label>
+        <textarea name="description" id="description" rows="4" cols="50"></textarea>
+        <br>
 
-    <button id="blue_button" disabled>Add Genre</button>    
-    <button id="blue_button" onclick="window.history.go(-1); return false;">Cancel</button> 
+        <input type="submit" id="blue_button" value="Add a Genre">   
+        <button id="blue_button" onclick="window.history.go(-1); return false;">Cancel</button> 
     </fieldset>
 </form>
+
+<script src="js/add_genre.js"></script>
