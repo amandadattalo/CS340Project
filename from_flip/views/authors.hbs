@@ -6,7 +6,6 @@
         <li id = "navli"><a href="authors">Authors</a></li>
         <li id = "navli"><a href="series">Series</a></li>
         <li id = "navli"><a href="genres">Genres</a></li>
-        <li id = "navli"><a href="intersection_tables">Book and Series to Authors</a></li>
     </ul>
 </nav>
 
@@ -32,8 +31,11 @@
     <tbody>
         {{#each data}}
         <tr data_value = {{this.author_id}}>
-            <td>{{this.First}}</td>
-            <td>{{this.Last}}</td>
+            <td>{{this.First_Name}}</td>
+            <td>{{this.Last_Name}}</td>
+            <td>
+                {{this.Books}}
+            </td>
             <td><button id="edit" onclick="location.href='/edit_authors?author_id={{this.author_id}}'">Edit</button></td>
             <td><button id='delete', onclick="deleteAuthor({{this.author_id}})">Delete</button>
         </tr>
