@@ -7,7 +7,7 @@ var app     = express();            // We need to instantiate an express object 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-PORT        = 8051;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 8034;                 // Set a port number at the top so it's easy to change in the future
 
 // Database
 var db = require('./database/db-connector')
@@ -42,33 +42,15 @@ const seriesModule = require('./routes/series.js');
 */
 
 // Home
-app.get('/', function(req, res)
-    {
+app.get('/', function(req, res) {
     res.render('index');
-    });
+});
 
 //Books
 app.get('/books', function(req, res) {  
     booksModule.getBooks(req, res)
 });
 
-
-app.get('/genres', function(req, res)
-    {
-    res.render('genres');
-    });
-
-app.get('/series', function(req, res)
-    {
-    res.render('series');
-    });
-
-app.get('/intersection_tables', function(req, res)
-    {
-    res.render('intersection_tables');
-    });
-
-// CRUD books
 app.get('/add_books', function(req, res) {
     booksModule.getAddBooks(req, res)
 });
@@ -167,12 +149,6 @@ app.delete('/delete_series', function(req, res) {
     seriesModule.deleteSeries(req, res)
 });
 
-
-
-
-app.get('/intersection_tables', function(req, res) {
-    res.render('intersection_tables');
-});
 
 /*
     LISTENER
