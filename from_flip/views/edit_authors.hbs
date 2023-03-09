@@ -14,19 +14,21 @@
 <h1>Edit Authors</h1>
 
 <!-- Form for editing an author -->
-<form>
+<form id="update_author">
     <fieldset>
         <legend>Edit an Author</legend>
 
         <label for="first_name">First name:</label>
-        <input type="text" name="first_name" id="first_name">
+        <input type="text" name="first_name" id="first_name" value="{{curr_first_name}}">
         <br>
 
         <label for="last_name">Last Name:</label>
-        <input name="last_name" id="last_name">
+        <input type="text" name="last_name" id="last_name" value="{{curr_last_name}}">
         <br>
 
-        <button id="blue_button" disabled>Edit Author</button>    
+        <input type="submit" id="blue_button" value="Edit Author"> 
         <button id="blue_button" onclick="window.history.go(-1); return false;">Cancel</button> 
     </fieldset>
 </form> 
+
+<script src="js/update_author.js"></script>
