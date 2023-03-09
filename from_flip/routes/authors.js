@@ -1,8 +1,12 @@
 var db = require('../database/db-connector')
 
 function getAuthors(req, res) {
-    let display_authors = "SELECT Authors.author_id, Authors.first_name AS First, Authors.last_name AS Last \
-                        FROM Authors;"
+    let display_authors = "SELECT Authors.author_id, Authors.first_name AS First_Name, Authors.last_name AS Last_Name, \
+    GROUP_CONCAT(Books.title SEPARATOR ', ') AS Books \
+    FROM Authors \
+    JOIN Books_Authors ON Authors.author_id = Books_Authors.author_id \
+    JOIN Books ON Books_Authors.book_id = Books.book_id \
+    GROUP BY Authors.author_id;"
 
     db.pool.query(display_authors, function(error, rows, fields) { 
         res.render('authors', {data: rows});  
