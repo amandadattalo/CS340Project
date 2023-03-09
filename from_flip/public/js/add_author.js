@@ -4,6 +4,8 @@ form.addEventListener('submit', addAuthor);
 
 function addAuthor(event){
     console.log("Is this getting called?");
+    event.preventDefault(); // prevent the default form submission
+
     let first_name = document.querySelector('#first_name').value;
     let last_name = document.querySelector('#last_name').value;
 
@@ -20,7 +22,7 @@ function addAuthor(event){
     xhr.onload = function() {
         if (xhr.status === 200) {
         alert("Author was added successfully!");
-        window.location.href = '/add_authors'; // redirect to /books
+        window.location.href = '/authors'; // redirect to /authors
         } else {
         console.log('Error: ' + xhr.status);
         alert('Something went wrong. Please ensure that all the required fields are selected.');
@@ -28,7 +30,7 @@ function addAuthor(event){
         }
     };
 
-    // set the request body to send the book data as JSON
+    // set the request body to send the author data as JSON
     let data = JSON.stringify({first_name, last_name});
     xhr.send(data);
 }

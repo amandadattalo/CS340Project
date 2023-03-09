@@ -26,7 +26,7 @@ function addSeries(event) {
     xhr.onload = function() {
         if (xhr.status === 200) {
         alert("Series was added successfully!");
-        window.location.href = '/add_series'; // redirect to /series
+        window.location.href = '/series'; // redirect to /series
         } else {
         console.log('Error: ' + xhr.status);
         alert('Something went wrong. Please ensure that all the required fields are selected.');
