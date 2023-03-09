@@ -27,7 +27,7 @@ function addBook(event) {
     xhr.onload = function() {
         if (xhr.status === 200) {
         alert("Book was added successfully!");
-        window.location.href = '/add_books'; // redirect to /books
+        window.location.href = '/books'; // redirect to /books
         } else {
         console.log('Error: ' + xhr.status);
         alert('Something went wrong. Please ensure that all the required fields are selected.');
