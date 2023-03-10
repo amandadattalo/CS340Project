@@ -8,8 +8,8 @@ GROUP_CONCAT(CONCAT(Authors.first_name, ' ', Authors.last_name) SEPARATOR ', ') 
 CASE WHEN Books.in_series then 'Yes' else 'No' end AS InSeries, Series.title AS Series, 
 Genres.name AS Genre 
 FROM Books 
-JOIN Books_Authors ON Books.book_id = Books_Authors.book_id 
-JOIN Authors ON Books_Authors.author_id = Authors.author_id 
+LEFT JOIN Books_Authors ON Books.book_id = Books_Authors.book_id 
+LEFT JOIN Authors ON Books_Authors.author_id = Authors.author_id 
 JOIN Genres ON Books.genre_id = Genres.genre_id 
 LEFT JOIN Series ON Books.series_id = Series.series_id 
 GROUP BY Books.book_id;
@@ -59,31 +59,25 @@ DELETE FROM Books_Authors WHERE book_id = :book_id
 -- #########################
 
 -- Query for Authors table 
-SELECT Authors.first_name, Authors.last_name
-FROM Authors;
+SELECT Authors.author_id, Authors.first_name AS First_Name, Authors.last_name AS Last_Name, 
+GROUP_CONCAT(Books.title SEPARATOR ', ') AS Books 
+FROM Authors 
+LEFT JOIN Books_Authors ON Authors.author_id = Books_Authors.author_id 
+LEFT JOIN Books ON Books_Authors.book_id = Books.book_id 
+GROUP BY Authors.author_id;
 
 -- Query for adding a new author
 -- Add new author
-INSERT INTO Author (first_name, last_name)
-VALUES (:first_nameInput, :last_nameInput);
+INSERT INTO Authors (first_name, last_name) VALUES (:first_name, :last_name)
 
 -- Query for editing an author
 -- Edit author
-UPDATE Authors
-SET first_name = :first_nameInput, last_name = :last_nameInput 
-WHERE id = :author_id_from_the_update_form;
+UPDATE Authors SET first_name = :first_name, last_name = :last_name 
+WHERE Authors.author_id = :author_id;
 
 -- Query for deleting an author
 -- Delete author
-DELETE FROM Authors
-WHERE id = :author_id_selected_from_browse_delete_page;
-
--- Delete author M:N
-DELETE FROM Books_Authors
-WHERE id = :author_id_selected_from_browse_delete_page;
-
-DELETE FROM Series_Authors
-WHERE id = :author_id_selected_from_browse_delete_page;
+DELETE FROM Authors WHERE author_id = :author_id;
 
 
 -- #########################
@@ -145,29 +139,3 @@ UPDATE Genres SET name = :name, description = :description WHERE Genres.genre_id
 -- Query for deleting a genre
 -- Delete genre
 DELETE FROM Genres WHERE genre_id = :genre_id;
-
-
--- #########################
--- BOOKS_AUTHORS
--- #########################
-
--- Query for Books_Authors table 
-SELECT Books.title AS Books,  CONCAT("", Authors.first_name, " ", Authors.last_name) AS Author
-FROM Books
-JOIN Books_Authors
-ON Books.book_id = Books_Authors.book_id
-JOIN Authors
-ON Books_Authors.author_id = Authors.author_id
-
-
--- #########################
--- SERIES_AUTHORS
--- #########################
-
--- Query for Series_Authors table 
-SELECT Series.title AS Series,  CONCAT("", Authors.first_name, " ", Authors.last_name) AS Author
-FROM Series
-JOIN Series_Authors
-ON Series.series_id = Series_Authors.series_id
-JOIN Authors
-ON Series_Authors.author_id = Authors.author_id
