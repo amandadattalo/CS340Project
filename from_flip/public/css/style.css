@@ -2,7 +2,6 @@ body, html{
     margin: 0;
     padding: 0;
     height: 100%;
-    /* background-color: #1d1e22; */
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans serif;
@@ -14,7 +13,6 @@ body, html{
 nav {  
     padding: 0;  
     margin: 0;
-    /* background-color:#77DD77;   */
     background-color: #DC4405;
     font-size: 12px;  
     text-transform: uppercase;
@@ -35,19 +33,6 @@ a {
     padding: 10px;  
     color: white;  
     text-decoration: none;
-}
-
-@media (max-width: 577px) {
-    a {
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-}
-
-@media (max-width: 517px) {
-    a {
-        font-size: 11px;
-    }
 }
 
 a:hover {
@@ -82,6 +67,7 @@ img {
     margin-left: 20%;
     margin-right: 20%;
 }
+
 
 @media (max-width: 1050px) {
     h4 {
@@ -160,7 +146,6 @@ img {
 
 table {
     border-collapse: collapse;
-    /* margin: 25px 0; */
     margin-left: auto;
     margin-right: auto;
     font-size: 14px;
@@ -185,13 +170,13 @@ tbody tr:last-of-type {
     border-bottom: 2px solid black;
 }
 
-.genres_table{
+#genres_table{
     margin-right: 20px;
     margin-left: 20px;
 }
 
 @media (max-width: 900px) {
-    #books_table{
+    #books_table, #genres_table, #authors_table{
         margin-right: 20px;
         margin-left: 20px;
     }
@@ -207,7 +192,7 @@ tbody tr:last-of-type {
     th, td {
         padding: 6px 7px;
     }
-    #books_table{
+    #books_table, #genres_table, #series_table, #authors_table {
         font-size: 12px;
     }
 
@@ -218,14 +203,14 @@ tbody tr:last-of-type {
 }
 
 @media (max-width: 490px) {
-    #books_table{
+    #books_table, #genres_table, #series_table, #authors_table {
         margin-right: 20px;
         margin-left: 20px;
     }
     th, td {
         padding: 3px 4px;
     }
-    #books_table{
+    #books_table, #genres_table, #series_table, #authors_table {
         font-size: 12px;
     }
 
@@ -274,68 +259,6 @@ input, select, textarea {
 
 #blue_button:hover {
     background-color: #1a73e8;
-}
- 
-
-/* Intersection Tables */
-.books_authors {
-    float: left;
-    margin-left: 20%;
-}
-
-.series_authors {
-    float: right;
-    margin-right: 20%;
-}
-
-@media (max-width: 1200px) {
-    .books_authors {
-        float: left;
-        margin-left: 15%;
-    }
-    
-    .series_authors {
-        float: right;
-        margin-right: 15%;
-    }
-}
-
-@media (max-width: 1050px) {
-    .books_authors {
-        float: left;
-        margin-left: 10%;
-    }
-    
-    .series_authors {
-        float: right;
-        margin-right: 10%;
-    }
-}
-
-@media (max-width: 900px) {
-    .books_authors {
-        float: left;
-        margin-left: 5%;
-    }
-    
-    .series_authors {
-        float: right;
-        margin-right: 5%;
-    }
-}
-
-@media (max-width: 800px) {
-    .books_authors {
-        float: none;
-        margin-left: 0;
-        margin-right: 0;
-    }
-    
-    .series_authors {
-        float: none;
-        margin-left: 0;
-        margin-right: 0;
-    }
 }
 
 
