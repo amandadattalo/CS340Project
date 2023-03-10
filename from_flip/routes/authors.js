@@ -4,8 +4,8 @@ function getAuthors(req, res) {
     let display_authors = "SELECT Authors.author_id, Authors.first_name AS First_Name, Authors.last_name AS Last_Name, \
     GROUP_CONCAT(Books.title SEPARATOR ', ') AS Books \
     FROM Authors \
-    JOIN Books_Authors ON Authors.author_id = Books_Authors.author_id \
-    JOIN Books ON Books_Authors.book_id = Books.book_id \
+    LEFT JOIN Books_Authors ON Authors.author_id = Books_Authors.author_id \
+    LEFT JOIN Books ON Books_Authors.book_id = Books.book_id \
     GROUP BY Authors.author_id;"
 
     db.pool.query(display_authors, function(error, rows, fields) { 
@@ -34,7 +34,7 @@ function postAddAuthors(req, res) {
     let insert_author = `INSERT INTO Authors (first_name, last_name) VALUES (?, ?)`;
 
     db.pool.query(insert_author, [first_name, last_name], function(error, rows, fields){
-        if (error){
+        if (error) {
             console.log(error)
             res.sendStatus(400);
         }
@@ -42,7 +42,6 @@ function postAddAuthors(req, res) {
             res.sendStatus(200);
         }
     })
-
 };
 
 
@@ -53,20 +52,14 @@ function getEditAuthors(req, res) {
     let curr_author = `SELECT Authors.first_name AS first_name, Authors.last_name AS last_name FROM Authors\
                     WHERE Authors.author_id = ?`
 
-    let query1 = "SELECT * FROM Books;";
-
-    db.pool.query(query1, function(error, rows, fields){   
-        let books = rows;
-
-        db.pool.query(curr_author, [author_id], function(error, rows, fields){
-            if(error){
-                console.log(error);
-            }
-            console.log(rows[0]);
-            let curr_first_name = rows[0].first_name;
-            let curr_last_name = rows[0].last_name;        
-            res.render('edit_authors', {curr_first_name: curr_first_name, curr_last_name: curr_last_name, books: books});
-        })
+    db.pool.query(curr_author, [author_id], function(error, rows, fields){
+        if(error) {
+            console.log(error);
+        }
+        console.log(rows[0]);
+        let curr_first_name = rows[0].first_name;
+        let curr_last_name = rows[0].last_name;        
+        res.render('edit_authors', {curr_first_name: curr_first_name, curr_last_name: curr_last_name});
     })
 };
 
@@ -88,52 +81,15 @@ function postEditAuthors(req, res) {
     let update_author = `UPDATE Authors SET first_name = ?, last_name = ?
             WHERE Authors.author_id = ?`;
 
-    //Query to get books written by Author
-    let select_books_written = `SELECT * FROM Books_Authors WHERE author_id = ?`;
-
-    // Query to delete and insert into Books_Authors
-    let delete_books_authors = `DELETE FROM Books_Authors WHERE author_id = ?`;
-    let insert_books_authors = `INSERT INTO Books_Authors (book_id, author_id) VALUES (?, ?)`;
-
-
-    // Delete from Authors
+    // Update Authors
     db.pool.query(update_author, [first_name, last_name, author_id], function(error, rows, fields){
         if (error) {
             console.log(error);
             res.sendStatus(500).send("Error updating author in database");
         } else {
-            db.pool.query(select_books_written, [author_id], function(error, rows, fields){
-                if(error){
-                    console.log(error.message);
-                    res.status(500).send("Error updating author in database");
-                }
-                else{
-                    //list of book written by author
-                    const books = rows;
-                    db.pool.query(delete_books_authors, [author_id], function(error){
-                        if(error){
-                            console.log(error.message);
-                            res.status(500).send("Error updating author in database");
-                        }
-                        else{
-                            // Insert into Book_Authors and iterate through books, if needed
-                            for (const book of books){
-                                book_id = book.book_id;
-                                db.pool.query(insert_books_authors, [book_id, author_id], function(err) {
-                                    if (err) {
-                                        console.log(err.message);
-                                        res.status(500).send("Error updating book authors in database");
-                                    }   
-                                })
-                            }
-            
-                        }
-                        res.sendStatus(200);
-                    })
-                }
-            })   
+            res.sendStatus(200);
         }
-    })
+    })      
 };
 
 

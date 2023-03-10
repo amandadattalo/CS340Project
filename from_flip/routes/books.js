@@ -6,8 +6,8 @@ function getBooks(req, res) {
     CASE WHEN Books.in_series then 'Yes' else 'No' end AS InSeries, Series.title AS Series, \
     Genres.name AS Genre \
     FROM Books \
-    JOIN Books_Authors ON Books.book_id = Books_Authors.book_id \
-    JOIN Authors ON Books_Authors.author_id = Authors.author_id \
+    LEFT JOIN Books_Authors ON Books.book_id = Books_Authors.book_id \
+    LEFT JOIN Authors ON Books_Authors.author_id = Authors.author_id \
     JOIN Genres ON Books.genre_id = Genres.genre_id \
     LEFT JOIN Series ON Books.series_id = Series.series_id \
     GROUP BY Books.book_id;"
@@ -43,7 +43,7 @@ function postAddBooks(req, res) {
     console.log(data)
 
     // Display error if user does not enter all necessary data
-    if (!data.title || !data.authors || !data.in_series || !data.genre) {
+    if (!data.title || data.authors.length === 0 || !data.in_series || !data.genre) {
         res.status(400).send("Error adding book to the database");
         return;
     }
@@ -155,7 +155,7 @@ function postEditBooks(req, res) {
     console.log(data)
 
     // Display error if user does not enter all necessary data
-    if (!data.title || !data.authors || !data.in_series || !data.genre) {
+    if (!data.title || data.authors.length === 0 || !data.in_series || !data.genre) {
         res.status(400).send("Error updating book in database");
         return;
     }
