@@ -2,7 +2,7 @@
 // scope (module, function or line): entire code 
 // date: 03/08/23
 // originality (copied, adapted, or based): based
-// source: CS340 starter code, stackoverflow and chatgpt
+// source: CS340 starter code, stackoverflow, w3schools and chatgpt
 
 // get the form and add a submit event listener
 const form = document.querySelector('#update_author');
