@@ -113,5 +113,5 @@ Intersection table to facilitate M:N relationship between Series and Authors
 # Schema
 ![SchemaDiagram](./from_flip/public/images/schema.jpeg)
 
-#Citations
+# Citations
 The CS340 starter code was used as a guide for most of the project. But stackoverflow posts and chatgpt was used for parts of update_book.js and to figure out how pre-populate the edit pages.
