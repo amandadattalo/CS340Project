@@ -1,0 +1,40 @@
+{{!-- Citation 
+scope (module, function or line): entire code 
+date: 03/09/23
+originality (copied, adapted, or based): based
+source: CS340 starter code and chatgpt --}}
+
+<!-- NAV -->
+<nav>
+    <ul>
+        <li id = "navli"><a href="/">Home</a></li>
+        <li id = "navli"><a href="books">Books</a></li>
+        <li id = "navli"><a href="authors">Authors</a></li>
+        <li id = "navli"><a href="series">Series</a></li>
+        <li id = "navli"><a href="genres">Genres</a></li>
+    </ul>
+</nav>
+
+<!-- Header -->
+<h1>Edit Genres</h1>
+   
+<!-- Form for editing a genre -->
+<form id="update_genre">
+    <fieldset>
+        <legend>Edit a Genre</legend>
+        
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" value="{{curr_genre_name}}">
+        <br>
+
+        <label for="description">Description:</label>
+        <textarea name="description" id="description" rows="4" cols="50">{{curr_genre_description}}</textarea>
+        <br>
+
+        <input type="submit" id="blue_button" value="Edit Genre"> 
+        <button id="blue_button" onclick="window.history.go(-1); return false;">Cancel</button> 
+
+    </fieldset>
+</form>
+
+<script src="js/update_genre.js"></script>
